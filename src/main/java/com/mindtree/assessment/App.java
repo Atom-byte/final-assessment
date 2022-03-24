@@ -35,12 +35,12 @@ public class App {
 	    }
 	   
 	    driver.findElement(By.id("listPageSearchLocality")).click();
-	    driver.findElement(By.id("listPageSearchLocality")).sendKeys("White");
+	    driver.findElement(By.id("listPageSearchLocality")).sendKeys("mallesh");
 	    
 	    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	    List<WebElement> suggestion= driver.findElements(By.xpath("//div[@class='suggestion-item']"));
 	    for(WebElement suggest : suggestion) {
-	    	if(suggest.getText().contains("Whitefield"));
+	    	if(suggest.getText().contains("malleshwaram"));
 	    	{
 	    		suggest.click();
 	    		break;
