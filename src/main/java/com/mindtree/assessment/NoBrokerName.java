@@ -1,6 +1,7 @@
 package com.mindtree.assessment;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,7 +15,7 @@ public class NoBrokerName {
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-		System.setProperty("webdriver.chrome.driver", "C:\\Sel_Drivers\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\\\Sel_Drivers\\\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		String expectedHeading = "Adam Mohammed Muzammil";
@@ -23,10 +24,11 @@ public class NoBrokerName {
 		
 		driver.findElement(By.xpath("//*[@id=\"navHeader\"]/div[5]/div[2]/div[2]/div")).click();
 		//WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-		Thread.sleep(5000L);
-		
+		//Thread.sleep(5000L);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//*[@id=\"signUp-phoneNumber\"]")).sendKeys("9110813270");
-		Thread.sleep(3000L);
+		//Thread.sleep(3000L);
+		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.findElement(By.xpath("//input[@value='password']")).click();
 		
 		driver.findElement(By.id("login-signup-form__password-input")).sendKeys("Adam123");
@@ -47,7 +49,13 @@ public class NoBrokerName {
 		
 		driver.findElement(By.xpath("//div[@class='form-group no-label '] //input[@id='nameText']")).clear();
 		driver.findElement(By.xpath("//div[@class='form-group no-label '] //input[@id='nameText']")).sendKeys("Adam Mohammed");
-		driver.findElement(By.xpath("//button[@id='saveProfile'")).click();
+		driver.findElement(By.xpath("//button[@id='saveProfile']")).click();
+		try {
+			String alert = driver.findElement(By.xpath("//div[@id='alertMessageBox']")).getText();
+			System.out.println(alert);
+			} catch(org.openqa.selenium.StaleElementReferenceException e){
+				
+			} 
 		
 		if(expectedHeading.equalsIgnoreCase(User))
           	System.out.println("The expected heading is same as actual heading --- "+User);
